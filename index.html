@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HEAVENLY TZ - WEUSI - 15K Mwezi</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui;
+}
+body {
+  background: #070a18;
+  color: #fff;
+}
+header {
+  background: #000;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid gold;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.wrap {
+  max-width: 430px;
+  margin: auto;
+  padding: 12px 12px 90px;
+}
+.top {
+  background: linear-gradient(90deg, gold, #ffb700);
+  color: #000;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 900;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.card {
+  background: #fff;
+  color: #111;
+  border-radius: 28px;
+  overflow: hidden;
+}
+.imgBox {
+  position: relative;
+  height: 600px;
+  background: #111;
+}
+.imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: #22c55e;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-weight: 800;
+  font-size: 11px;
+}
+.badge2 {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(0,0,0,.7);
+  color: gold;
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-weight: 800;
+  font-size: 11px;
+  border: 1px solid rgba(255,215,0,.3);
+}
+.info {
+  padding: 18px;
+}
+.name {
+  font-size: 24px;
+  font-weight: 900;
+}
+.meta {
+  color: #64748b;
+  font-size: 13px;
+  margin-top: 4px;
+  font-weight: 600;
+}
+.bio {
+  margin: 12px 0;
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.6;
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 12px;
+  border-left: 4px solid gold;
+}
+.cbox {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.9;
+  font-weight: 600;
+}
+.blur {
+  filter: blur(7px);
+  user-select: none;
+  background: #1e293b;
+  padding: 0 6px;
+  border-radius: 4px;
+}
+.act {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  background: #f8fafc;
+}
+.act button {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  border-radius: 99px;
+  font-weight: 900;
+  font-size: 14px;
+}
+.box {
+  background: #141c36;
+  border: 1px solid #243158;
+  padding: 18px;
+  border-radius: 20px;
+  margin-top: 16px;
+}
+.pay {
+  background: #000;
+  border: 2px dashed gold;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  margin: 12px 0;
+}
+.num {
+  font-size: 32px;
+  font-weight: 900;
+  color: gold;
+  margin: 8px 0;
+}
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  margin: 7px 0;
+  border-radius: 12px;
+  background: #080c1e;
+  border: 1.5px solid #2a365f;
+  color: #fff;
+  outline: none;
+}
+.btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(90deg, gold, #ffb700);
+  color: #000;
+  border: none;
+  border-radius: 99px;
+  font-weight: 900;
+  font-size: 15px;
+  margin-top: 10px;
+}
+.wa {
+  background: #25D366;
+  color: #fff;
+  display: block;
+  text-align: center;
+  padding: 15px;
+  border-radius: 99px;
+  font-weight: 900;
+  text-decoration: none;
+  margin-top: 10px;
+}
+.chat {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  background: #0f172a;
+  border-top: 3px solid gold;
+  border-radius: 22px 22px 0 0;
+  padding: 14px;
+  display: none;
+  z-index: 30;
+}
+.list {
+  height: 180px;
+  overflow-y: auto;
+  background: #080c1e;
+  border-radius: 14px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0;
+  border: 1px solid #1e293b;
+}
+.b {
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  max-width: 82%;
+  line-height: 1.5;
+}
+.me {
+  background: gold;
+  color: #000;
+  align-self: flex-end;
+  font-weight: 600;
+}
+.them {
+  background: #1e293b;
+  color: #fff;
+  align-self: flex-start;
+  border: 1px solid #2a365f;
+}
+.small {
+  font-size: 11px;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+<header>
+<b style="color:gold">HEAVENLY ♥ TZ - WEUSI</b>
+<div style="color:gold;font-size:10px;text-align:right;font-weight:700">
+15K / MWEZI<br>
+0674429728<br>
+crisantasherly@gmail.com
+</div>
+</header>
+<div class="wrap">
+<div class="top" id="top">
+BEI: 15,000 TZS / MWEZI (SIKU 30) - 0674429728<br>
+crisantasherly@gmail.com - WEUSI 8
+</div>
+<div class="card">
+<div class="imgBox">
+<img id="img" src="https://i.pravatar.cc/800?img=32">
+<div class="badge">● ONLINE</div>
+<div class="badge2">👩🏾 MWEUSI</div>
+</div>
+<div class="info">
+<div style="display:flex;justify-content:space-between">
+<div class="name" id="n"></div>
+<div style="background:#dcfce7;color:#166534;padding:5px 12px;border-radius:99px;font-size:11px;font-weight:800">✓ VERIFIED</div>
+</div>
+<div class="meta" id="m"></div>
+<div class="bio" id="b"></div>
+<div class="cbox" id="c"></div>
+<div class="small" style="margin-top:10px">
+Weusi 100% TZ | crisantasherly@gmail.com | 0674429728 | 15K Mwezi
+</div>
+</div>
+<div class="act">
+<button onclick="nextP()" style="background:#e2e8f0">✕ SKIP</button>
+<button onclick="openC()" style="background:#111;color:#fff">💬 CHAT 3 FREE</button>
+<button onclick="nextP()" style="background:gold">♥ LIKE</button>
+</div>
+</div>
+<div class="box" style="border-color:gold">
+<div style="color:gold;font-weight:900;margin-bottom:8px">💳 MALIPO YA MWEZI - 15,000 TZS (SIKU 30)</div>
+<p class="small" style="color:#cbd5e1;font-size:12px">
+✓ Weusi 8 - email + simu halisi<br>
+✓ Chat 3 bure<br>
+✓ Baada ya 15K: Chat bila kikomo SIKU 30<br>
+✓ Baada ya 30 inaisha - lipa tena<br>
+✓ Support: crisantasherly@gmail.com
+</p>
+<div class="pay">
+<div style="font-weight:900;font-size:13px">LIPA HAPA - 15K / MWEZI</div>
+<div class="num">0674429728</div>
+<div class="small">Tigo/M-Pesa/Airtel - HEAVENLY TZ - 15K = 30 Siku - crisantasherly@gmail.com - $7 USD nje</div>
+</div>
+<a class="wa" href="https://wa.me/255674429728?text=Nimelipa%2015K%20Mwezi">WHATSAPP: 0674429728</a>
+<input class="input" id="code" placeholder="CODE: TZ15K-0674429728">
+<button class="btn" onclick="unlock()">FUNGUA PREMIUM 15K / 30 SIKU</button>
+<p id="pI" style="font-size:11px;color:gold;margin-top:8px;font-weight:800"></p>
+<p id="eI" style="font-size:11px;color:#22c55e;margin-top:4px;font-weight:800"></p>
+</div>
+<div class="box">
+<div style="color:gold;font-weight:900;margin-bottom:8px">📝 JIUNGE BURE</div>
+<input class="input" id="jina" placeholder="Jina kamili">
+<input class="input" id="email" placeholder="Email yako">
+<input class="input" id="simu" placeholder="Simu">
+<input class="input" id="umri" placeholder="Umri">
+<input class="input" id="mji" placeholder="Mji">
+<button class="btn" onclick="join()">JIUNGE BURE</button>
+<p id="jI" style="font-size:12px;color:#22c55e;margin-top:8px;font-weight:700"></p>
+</div>
+<div class="small" style="text-align:center;margin:24px 0">
+© 2026 HEAVENLY TZ - Weusi - 15K / Mwezi - 0674429728 - crisantasherly@gmail.com
+</div>
+</div>
+<div class="chat" id="chat">
+<div style="display:flex;justify-content:space-between">
+<b id="cN" style="color:gold"></b>
+<button onclick="chat.style.display='none'" style="background:#1e293b;color:#fff;border:none;padding:6px 14px;border-radius:99px;font-weight:700">X</button>
+</div>
+<div class="list" id="list"></div>
+<div style="display:flex;gap:8px">
+<input class="input" id="t" placeholder="Andika..." style="margin:0;flex:1">
+<button onclick="send()" style="background:gold;border:none;padding:14px 20px;border-radius:99px;font-weight:900">Tuma</button>
+</div>
+<small id="cI" style="font-size:10px;color:#64748b;margin-top:6px;display:block"></small>
+</div>
+<script>
+const G=[
+{n:"Neema",a:24,c:"Dar es Salaam",b:"Mweusi mrembo, napenda familia na mapenzi ya ukweli. Natoka Temeke, napenda kupika pilau.",e:"neema24@gmail.com",t:"0712345678",i:"https://i.pravatar.cc/800?img=32"},
+{n:"Asha",a:23,c:"Arusha",b:"Mrembo wa Arusha, napenda gym, safari na kuchora. Mweusi wa asili wa Kimasai.",e:"asha23@gmail.com",t:"0754123456",i:"https://i.pravatar.cc/800?img=26"},
+{n:"Zawadi",a:25,c:"Mwanza",b:"Mwanamke wa nyumbani, napenda kupika na watoto. Mweusi mcheshi wa Ziwa.",e:"zawadi25@gmail.com",t:"0765987321",i:"https://i.pravatar.cc/800?img=23"},
+{n:"Faith",a:26,c:"Mbeya",b:"Fashion designer mweusi, napenda mitindo ya Kiafrika. Nipo Kabwe.",e:"faith26@gmail.com",t:"0784444555",i:"https://i.pravatar.cc/800?img=22"},
+{n:"Happy",a:22,c:"Dodoma",b:"Student UDOM, napenda movies na beach. Mweusi mrembo simple girl.",e:"happy22@gmail.com",t:"0715222333",i:"https://i.pravatar.cc/800?img=19"},
+{n:"Rehema",a:24,c:"Tanga",b:"Mweusi tamu wa Tanga, napenda mapenzi ya ukweli na bahari.",e:"rehema24@gmail.com",t:"0713999111",i:"https://i.pravatar.cc/800?img=31"},
+{n:"Salma",a:27,c:"Dar es Salaam",b:"Mfanyabiashara Kariakoo, mweusi mjasiriamali. Napenda biashara.",e:"salma27@gmail.com",t:"0674429728",i:"https://i.pravatar.cc/800?img=33"},
+{n:"Pendo",a:23,c:"Morogoro",b:"Mwalimu, napenda watoto na kusoma. Mweusi mpole wa Morogoro.",e:"pendo23@gmail.com",t:"0621111222",i:"https://i.pravatar.cc/800?img=25"}
+];
+let idx=0;
+let prem=localStorage.getItem('hp')==='1';
+let free=parseInt(localStorage.getItem('hf')||'3');
+const CODES=["TZ15K-0674429728","HEAVEN15","CRISAN15K","15K-MWEZI","HEAVENLY30"];
+function chk(){
+let ex=localStorage.getItem('he');
+if(!ex) return;
+let now=new Date();
+let ed=new Date(ex);
+if(now>ed){
+localStorage.setItem('hp','0');
+localStorage.setItem('hf','0');
+prem=false;
+free=0;
+eI.innerText="IMEISHA "+ed.toLocaleDateString()+" - Lipa tena 0674429728 - crisantasherly@gmail.com";
+top.innerText="IMEISHA - LIPA TENA 15K - 0674429728";
+}else{
+let d=Math.ceil((ed-now)/86400000);
+eI.innerText="ACTIVE Siku "+d+" - "+ed.toLocaleDateString()+" - crisantasherly@gmail.com";
+top.innerText="15K ACTIVE Siku "+d+" - 0674429728 - crisantasherly@gmail.com";
+}
+}
+function render(){
+let g=G[idx];
+img.src=g.i;
+n.innerText=g.n+" 👩🏾";
+m.innerText=g.a+" • "+g.c+" • Mweusi";
+b.innerText=g.b;
+c.innerHTML=prem?`📧 ${g.e}<br>📱 ${g.t}<br>💰 15K / 30 Siku<br>💬 Bila kikomo<br>📧 crisantasherly@gmail.com`:`📧 <span class=blur>${g.e}</span><br>📱 <span class=blur>${g.t}</span><br>💰 15,000 TZS / Mwezi<br>💬 ${free} free<br>📧 crisantasherly@gmail.com`;
+cN.innerText=g.n+" - "+g.c;
+cI.innerText=prem?`Bila kikomo - ${g.e}`:`${free} free - 0674429728 - crisantasherly@gmail.com`;
+chk();
+}
+function nextP(){
+idx=(idx+1)%G.length;
+render();
+}
+function openC(){
+chat.style.display='block';
+list.innerHTML=`<div class='b them'>Hi ni ${G[idx].n} - ${prem?G[idx].e+" | "+G[idx].t:"Lipa 15K 0674429728 - crisantasherly@gmail.com"}</div>`;
+render();
+}
+function send(){
+let v=t.value.trim();
+if(!v) return;
+if(!prem&&free<=0){
+alert('Lipa 15K 0674429728 - crisantasherly@gmail.com');
+return;
+}
+list.innerHTML+=`<div class='b me'>${v}</div>`;
+t.value='';
+if(!prem){
+free--;
+localStorage.setItem('hf',free);
+}
+setTimeout(()=>{
+list.innerHTML+=`<div class='b them'>${prem?G[idx].e+" | "+G[idx].t:"Lipa 15K 0674429728 - "+G[idx].e}</div>`;
+render();
+},600);
+}
+function unlock(){
+let v=code.value.toUpperCase();
+if(CODES.indexOf(v)===-1){
+pI.innerText="CODE si sahihi - Lipa 0674429728 - crisantasherly@gmail.com";
+return;
+}
+let now=new Date();
+let exp=new Date();
+exp.setDate(now.getDate()+30);
+localStorage.setItem('hp','1');
+localStorage.setItem('hf','999');
+localStorage.setItem('he',exp.toISOString());
+prem=true;
+free=999;
+render();
+pI.innerText="15K - 30 Siku - "+exp.toLocaleDateString()+" - "+G[idx].e+" - crisantasherly@gmail.com";
+}
+function join(){
+let j=jina.value;
+let e=email.value;
+let s=simu.value;
+let u=umri.value;
+let mm=mji.value;
+if(!j||!e||!s){
+alert('Jaza Jina Email Simu');
+return;
+}
+jI.innerHTML=`${j}<br>📧 ${e}<br>📱 ${s}<br>🎂 ${u}<br>📍 ${mm}<br>💰 15K / Mwezi - 0674429728<br>📧 crisantasherly@gmail.com`;
+}
+render();
+chk();
+setInterval(chk,60000);
+</script>
+</body>
+</html>
