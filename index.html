@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Heavenly</title>
+<style>
+body{background:#050e2a;color:#fff;margin:0;font-family:sans-serif}
+.top{background:#0d2d6b;border-bottom:4px solid #d4af37;padding:18px;text-align:center}
+.box{max-width:480px;margin:auto;padding:10px}
+.c{background:#0e2f6b;border-left:4px solid #d4af37;border-radius:10px;padding:12px;margin:10px 0}
+.b{width:100%;padding:12px;background:#d4af37;color:#050e2a;font-weight:900;border:none;border-radius:8px}
+input,textarea{width:100%;padding:10px;margin:5px 0;border-radius:7px;border:1px solid #1e4fa0;background:#061a3e;color:#fff;box-sizing:border-box}
+.h{display:none}
+</style>
+</head>
+<body>
+<div class="top"><h2 style="color:#ffdf6b;margin:0">HEAVENLY MARCHING TZ</h2><small style="color:#d4af37">GOLD & BLUE</small></div>
+<div class="box">
+<div id="u1">
+<div class="c">
+<input id="jina" placeholder="Jina">
+<input id="umri" placeholder="Umri" type="number">
+<input id="mkoa" placeholder="Mkoa">
+<textarea id="maelezo" placeholder="Maelezo"></textarea>
+<input id="siri" placeholder="Namba ya siri">
+<button class="b" onclick="tuma()">TANGAZA</button>
+</div>
+<div class="c" style="text-align:center"><b style="color:#ffdf6b">TIGO PESA: 0674429728</b></div>
+<div id="list"></div>
+</div>
+<div id="u2" class="h">
+<div class="c" style="text-align:center">
+<h3 style="color:#ffdf6b">ADMIN</h3>
+<input id="pass" type="password" placeholder="Password">
+<button class="b" onclick="ingia()">INGIA</button>
+<br><br>
+<button class="b" onclick="rudi()" style="background:#061a3e;color:#fff;border:1px solid #1e4fa0">RUDI</button>
+</div>
+<div id="adminArea" class="h">
+<div class="c" style="background:#d4af37;color:#050e2a"><b id="hesabu">0</b> <button onclick="futa()" style="float:right;background:#900;color:#fff;border:none;padding:5px 10px;border-radius:5px">FUTA WOTE</button></div>
+<div id="alist"></div>
+</div>
+</div>
+</div>
+<button onclick="admin()" style="position:fixed;bottom:10px;right:10px;width:45px;height:45px;border-radius:50%;background:#d4af37;border:none">⚙️</button>
+<script>
+var watu=[];
+try{watu=JSON.parse(localStorage.getItem("hm2")||"[]")}catch(e){}
+function onyesha(){
+var l=document.getElementById("list");l.innerHTML="";
+for(var i=0;i<watu.length;i++){
+http://l.innerHTML+='<div class="c"><b style="color:#ffdf6b">'+watu.jina+' - '+watu.umri+'</b> - '+watu.mkoa+'<br><small>'+watu.maelezo+'</small></div>';
+}
+}
+function onyeshaAdmin(){
+var l=document.getElementById("alist");l.innerHTML="";
+http://document.getElementById("hesabu").innerHTML="Watu "+watu.length;
+for(var i=0;i<watu.length;i++){
+http://l.innerHTML+='<div class="c"><b>'+watu.jina+' '+watu.umri+' '+watu.mkoa+'</b><br><small>'+watu.maelezo+'</small><br><b style="color:#ffdf6b">'+watu.siri+'</b></div>';
+}
+}
+function tuma(){
+var j=document.getElementById("jina").value;var u=document.getElementById("umri").value;var m=document.getElementById("mkoa").value;var d=document.getElementById("maelezo").value;var s=document.getElementById("siri").value;
+if(j==""||u==""||m==""){alert("Jaza jina, umri, mkoa");return;}
+http://watu.unshift({jina:j,umri:u,mkoa:m,maelezo:d,siri:s});
+http://localStorage.setItem("hm2",JSON.stringify(watu));
+http://document.getElementById("jina").value="";document.getElementById("umri").value="";document.getElementById("mkoa").value="";document.getElementById("maelezo").value="";document.getElementById("siri").value="";
+onyesha();alert("Imetumwa!");
+}
+function admin(){document.getElementById("u1").className="h";document.getElementById("u2").className="";}
+function rudi(){document.getElementById("u2").className="h";document.getElementById("u1").className="";document.getElementById("adminArea").className="h";onyesha();}
+function ingia(){if(document.getElementById("pass").value=="Heavenly@2026"){document.getElementById("adminArea").className="";onyeshaAdmin();}else{alert("Password si sahihi");}}
+function futa(){if(confirm("Futa wote?")){localStorage.removeItem("hm2");watu=[];onyesha();onyeshaAdmin();}}
+onyesha();
+</script>
+</body>
+</html>[i]
