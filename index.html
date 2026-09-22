@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Heavenly Marching</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#0f172a;color:#fff;font-family:Arial;padding-bottom:70px}
+.header{text-align:center;padding:16px}.halo{width:48px;height:12px;border:2px solid #c9a227;border-radius:50%;margin:0 auto 4px}
+.header h1{color:#c9a227;letter-spacing:3px;line-height:1}.header h1 span{display:block;font-weight:300;font-size:14px;letter-spacing:6px}
+.box{max-width:440px;margin:10px auto;background:#1e293b;padding:14px;border-radius:16px;border:1px solid #2a3655}
+input,select,textarea{width:100%;padding:11px;margin:4px 0;background:#0f172a;border:1px solid #334155;border-radius:10px;color:#fff}
+.btn{width:100%;padding:12px;border:none;border-radius:12px;font-weight:bold;cursor:pointer}.btn-gold{background:#fde68a;color:#000}.btn-dark{background:#334155;color:#fff}
+.card{max-width:440px;margin:10px auto;background:#1e293b;border:1.5px solid #fde68a;border-radius:16px;padding:10px}
+.card-top{display:flex;gap:10px;align-items:center}.avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid #fde68a;background:#0f172a}
+.tahadhari{background:#3f1a1a;border:1px solid #ef4444;padding:10px;border-radius:12px;font-size:13px;margin:10px auto;max-width:440px}
+#payPage,#adminPage{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:999;padding:14px;overflow:auto}
+.paybox{max-width:390px;margin:20px auto;background:#1e293b;padding:18px;border-radius:18px;border:2px solid #fde68a}
+.pkg{border:1px solid #334155;padding:11px;border-radius:10px;margin:6px 0;display:flex;justify-content:space-between;cursor:pointer;background:#0f172a}
+.pkg.active{border-color:#fde68a;background:#2a3655}
+.mfano{background:#0f172a;border:1px dashed #fde68a;padding:8px;border-radius:8px;margin:8px 0;font-size:12px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#1e293b;display:flex;justify-content:space-around;padding:10px;border-top:1px solid #2a3655}
+.nav b{cursor:pointer;color:#94a3b8}.nav b.active{color:#fde68a}
+</style>
+</head>
+<body>
+<div class="header"><div class="halo"></div><h1>HEAVENLY<span>MARCHING</span></h1></div>
+<div class="tahadhari">⚠️ TAHADHARI: Lipa kwanza 0674429728 kisha weka Muamala No / Transaction No ili kufungua namba.</div>
+<div class="box"><h3 style="color:#fde68a">Jisajili</h3><input id="jina" placeholder="Jina"><input id="umri" type="number" placeholder="Umri"><select id="mkoa"><option>Dar</option><option>Arusha</option><option>Mwanza</option><option>Dodoma</option><option>Mbeya</option></select><textarea id="maelezo" placeholder="Maelezo"></textarea><input id="namba" placeholder="Namba ya simu"><button class="btn btn-gold" onclick="ongeza()">TUMA</button></div>
+<div id="list"></div>
+<div id="payPage"><div class="paybox"><h3 style="color:#fde68a;text-align:center">LIPA 0674429728</h3><div class="pkg active" onclick="setPkg(this)"><div><b>WIKI</b><br><small>Siku 7</small></div><b>5,000</b></div><div class="pkg" onclick="setPkg(this)"><div><b>MWEZI</b><br><small>Siku 30</small></div><b>15,000</b></div><div class="mfano">Muamala No / Transaction No:<br><b style="background:#fff;color:#000;padding:3px 8px;border-radius:5px">CI260921.1215.R20766</b></div><input id="transCode" placeholder="Muamala No / Transaction No" style="background:#fff;color:#000" oninput="autoCheck()"><button class="btn btn-gold" style="margin-top:8px" onclick="thibitisha()">FUNGUA</button><button class="btn btn-dark" onclick="closePay()">X</button></div></div>
+<div id="adminPage"><div class="paybox"><h3 style="color:#fde68a">ADMIN</h3><input id="adminPass" type="password" placeholder="Password"><button class="btn btn-gold" onclick="loginAdmin()">INGIA</button><div id="adminContent" style="display:none;margin-top:12px"><div id="adminList"></div><div id="payList" style="font-size:12px;background:#0f172a;padding:8px;border-radius:8px;margin-top:8px"></div><button class="btn btn-dark" style="margin-top:10px" onclick="closeAdmin()">FUNGA</button></div></div></div>
+<div class="nav"><b class="active">Home</b><b onclick="openAdmin()">Admin</b></div>
+<script>
+let watu=[{jina:"Aisha",umri:23,mkoa:"Dar",namba:"0745123456",maelezo:"Natafuta mwenza",pic:"https://i.pravatar.cc/150?img=5"},{jina:"Neema",umri:22,mkoa:"Arusha",namba:"0765123987",maelezo:"Natafuta upendo",pic:"https://i.pravatar.cc/150?img=32"},{jina:"Zawadi",umri:24,mkoa:"Mwanza",namba:"0754123456",maelezo:"Nipo tayari",pic:"https://i.pravatar.cc/150?img=26"},{jina:"Brian",umri:28,mkoa:"Dodoma",namba:"0712345678",maelezo:"Natafuta mke",pic:"https://i.pravatar.cc/150?img=12"},{jina:"Faith",umri:21,mkoa:"Mbeya",namba:"0685123456",maelezo:"Natafuta",pic:"https://i.pravatar.cc/150?img=9"},{jina:"Rehema",umri:25,mkoa:"Dar",namba:"0695123456",maelezo:"Natafuta serious",pic:"https://i.pravatar.cc/150?img=23"},{jina:"John",umri:30,mkoa:"Arusha",namba:"0744123456",maelezo:"Mwanaume serious",pic:"https://i.pravatar.cc/150?img=15"},{jina:"Grace",umri:26,mkoa:"Dar",namba:"0755123456",maelezo:"Natafuta mchumba",pic:"https://i.pravatar.cc/150?img=16"},{jina:"David",umri:27,mkoa:"Mwanza",namba:"0764123456",maelezo:"Natafuta mpenzi",pic:"https://i.pravatar.cc/150?img=8"},{jina:"Esther",umri:22,mkoa:"Dar",namba:"0714123456",maelezo:"Nipo single",pic:"https://i.pravatar.cc/150?img=19"}];
+let sel=0,malipo=[];
+function setPkg(el){document.querySelectorAll('.pkg').forEach(p=>p.classList.remove('active'));el.classList.add('active');}
+function render(){let h='';watu.slice().reverse().forEach((w,i)=>{let idx=watu.length-1-i;h+=`<div class="card"><div class="card-top"><img src="${w.pic}" class="avatar"><div><b>${w.jina}, ${w.umri}</b> - ${w.mkoa}<br><small>${w.maelezo}</small><div id="n-${idx}" style="margin-top:5px"><span style="filter:blur(6px)">${w.namba}</span></div></div></div><button class="btn btn-gold" style="margin-top:8px" onclick="openPay(${idx})">ONA NAMBA</button></div>`});document.getElementById('list').innerHTML=h;}
+function ongeza(){let j=jina.value.trim(),u=umri.value,n=namba.value.trim();if(!j||!u||!n){alert('Jaza');return;}watu.push({jina:j,umri:u,mkoa:mkoa.value,namba:n,maelezo:maelezo.value,pic:"https://i.pravatar.cc/150?img="+(Math.floor(Math.random()*70))});render();jina.value=umri.value=namba.value=maelezo.value='';}
+function openPay(i){sel=i;payPage.style.display='block';}
+function closePay(){payPage.style.display='none';}
+function autoCheck(){let v=transCode.value.trim();if(v.length>=12&&v.includes('.'))thibitisha();}
+function thibitisha(){let c=transCode.value.trim();if(c.length<10)return;malipo.push(c+' - '+watu[sel].jina+' - '+new Date().toLocaleString());let w=watu[sel];closePay();let wa=w.namba.startsWith('0')?'255'+w.namba.slice(1):w.namba;document.getElementById('n-'+sel).innerHTML=`<b style="color:#22c55e">${w.namba}</b><br><a href="tel:${w.namba}" style="color:#fde68a">📞 Piga</a> | <a href="https://wa.me/${wa}" style="color:#25d366">💬 DM</a>`;transCode.value='';}
+function openAdmin(){adminPage.style.display='block';}
+function closeAdmin(){adminPage.style.display='none';adminContent.style.display='none';}
+function loginAdmin(){if(adminPass.value!=='heavenly@26'){alert('Password si sahihi');return;}adminContent.style.display='block';let h='';watu.forEach(w=>{h+=`<div style="border-bottom:1px solid #334155;padding:4px 0">${w.jina} - ${w.namba}</div>`});adminList.innerHTML=h;payList.innerHTML=malipo.length?malipo.join('<br>'):'Hakuna';}
+render();
+</script>
+</body>
+</html>
