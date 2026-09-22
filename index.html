@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HEAVENLY MARCHING TZ</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#070d2b;color:#fff;font-family:system-ui}
+.h{background:#0a1931;border-bottom:3px solid #d4af37;padding:15px;text-align:center;color:#d4af37;font-weight:800}
+.c{background:#111d4d;border:1px solid #d4af37;border-radius:14px;padding:14px;margin:12px}
+input,select,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #d4af37;background:#070d2b;color:#fff;margin:6px 0}
+button{width:100%;padding:12px;border-radius:10px;border:none;font-weight:800;cursor:pointer}
+.g{background:#d4af37;color:#0a1931}.bl{filter:blur(7px);user-select:none}
+.bx{border:2px dashed #d4af37;padding:14px;border-radius:12px;background:#0a1931;margin-top:10px;text-align:center}
+.op{display:flex;gap:8px}.op div{flex:1;border:1px solid #d4af37;border-radius:10px;padding:12px;text-align:center;cursor:pointer}
+.sel{background:#d4af37;color:#0a1931!important}
+</style>
+</head>
+<body>
+<div class="h">HEAVENLY MARCHING TZ</div>
+
+<div class="c">
+<input id="j" placeholder="Jina">
+<input id="u" type="number" placeholder="Umri">
+<select id="m"><option value="">Chagua Mkoa</option><option>Arusha</option><option>Dar</option><option>Dodoma</option><option>Mbeya</option><option>Mwanza</option><option>Kilimanjaro</option><option>Morogoro</option><option>Tanga</option><option>Geita</option><option>Mara</option><option>Iringa</option><option>Zanzibar</option><option>Pwani</option><option>Tabora</option></select>
+<input id="s" placeholder="Namba yako 07...">
+<textarea id="e" placeholder="Description..."></textarea>
+<button class="g" onclick="addUser()">TANGAZA</button>
+</div>
+
+<div class="c" id="pay" style="display:none">
+<b style="color:#d4af37">CHAGUA KIFURUSHI:</b>
+<div class="op" style="margin:10px 0">
+<div id="oW" onclick="choose('week')"><b>WIKI</b><br>5,000 TZS</div>
+<div id="oM" onclick="choose('month')"><b>MWEZI</b><br>15,000 TZS</div>
+</div>
+<div class="bx">
+Lipa TigoPesa<br>
+<b style="font-size:22px;color:#d4af37">0674429728</b><br><br>
+Kiasi: <b id="k">5,000</b><br><br>
+<button class="g" onclick="doUnlock()">NIMELIPA ✅ FUNGUA</button>
+</div>
+</div>
+
+<div id="list"></div>
+
+<script>
+var KEY='heavenly_v3';var watu=[];try{watu=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){watu=[]}
+var paid=localStorage.getItem('paid_v3')||'';var plan='week';
+function choose(p){plan=p;document.getElementById('oW').className=p=='week'?'sel':'';document.getElementById('oM').className=p=='month'?'sel':'';document.getElementById('k').innerText=p=='week'?'5,000 TZS - WIKI':'15,000 TZS - MWEZI';}
+function addUser(){var jv=document.getElementById('j').value.trim(),uv=document.getElementById('u').value.trim(),mv=document.getElementById('m').value,sv=document.getElementById('s').value.trim(),ev=document.getElementById('e').value.trim();if(!jv||!uv||!mv||!sv||!ev){alert('Jaza zote');return;}watu.unshift({j:jv,u:uv,m:mv,s:sv,e:ev});localStorage.setItem(KEY,JSON.stringify(watu));document.getElementById('j').value='';document.getElementById('u').value='';document.getElementById('s').value='';document.getElementById('e').value='';document.getElementById('m').value='';render();}
+function showPay(){document.getElementById('pay').style.display='block';choose(plan);window.scrollTo(0,300);}
+function doUnlock(){localStorage.setItem('paid_v3','yes');paid='yes';document.getElementById('pay').style.display='none';render();alert('Ahsante! Namba zimefunguka');}
+function render(){var out='';for(var i=0;i<watu.length;i++){var x=watu[i];var isPaid=paid=='yes';var blur=isPaid?'':'bl';var btn=isPaid?'<div style="display:flex;gap:6px;margin-top:8px"><a href="tel:'+x.s+'" style="flex:1;text-align:center;background:#0a1931;color:#d4af37;padding:10px;border-radius:8px;text-decoration:none;border:1px solid #d4af37">PIGA</a><a href="https://wa.me/'+x.s.replace(/^0/,'255')+'" target="_blank" style="flex:1;text-align:center;background:#25D366;color:#fff;padding:10px;border-radius:8px;text-decoration:none">WHATSAPP</a></div>':'<button class="g" onclick="showPay()" style="margin-top:8px">🔒 LIPA KUONA NAMBA</button>';out+='<div class="c"><b>'+x.j+' | '+x.u+' | '+x.m+'</b><br><small>'+x.e+'</small><br><div class="'+blur+'" style="color:#d4af37;font-weight:800;margin-top:6px">'+x.s+'</div>'+btn+'</div>';}document.getElementById('list').innerHTML=out;}
+render();choose('week');
+</script>
+</body>
+</html>
