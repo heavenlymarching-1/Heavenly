@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heavenly Marching</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#0f172a;color:#fff;font-family:Arial;padding-bottom:80px}
+.header{text-align:center;padding:22px 10px 10px}.halo{width:48px;height:12px;border:2px solid #c9a227;border-radius:50%;margin:0 auto 5px;box-shadow:0 0 10px #c9a227}
+.header h1{color:#c9a227;letter-spacing:3px;line-height:1}.header h1 span{display:block;font-weight:300;font-size:16px;letter-spacing:6px}
+.box{max-width:430px;margin:12px auto;background:#1e293b;padding:16px;border-radius:18px;border:1px solid #2a3655}
+input,select,textarea{width:100%;padding:12px;margin:5px 0;background:#0f172a;border:1px solid #334155;border-radius:10px;color:#fff}
+.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:bold;cursor:pointer}.btn-gold{background:#fde68a;color:#000}.btn-outline{background:transparent;border:1.5px solid #fde68a;color:#fde68a}
+.rules{background:#0f172a;padding:10px;border-radius:10px;margin-top:10px;font-size:12px;color:#cbd5e1;line-height:1.7}
+.disc{max-width:430px;margin:10px auto;background:#450a0a;padding:10px;border-radius:10px;border-left:4px solid #ef4444;font-size:11px;color:#fca5a5}
+.card{max-width:430px;margin:12px auto;background:#1e293b;border:1.5px solid #fde68a;border-radius:18px;padding:12px}
+.card-top{display:flex;gap:10px;align-items:center}.avatar{width:74px;height:74px;border-radius:50%;object-fit:cover;border:2px solid #fde68a;background:#0f172a}.blur{filter:blur(6px)}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#0b1220;border-top:1px solid #1e293b;display:flex;justify-content:space-around;padding:8px 0;z-index:99}
+.bottom div{text-align:center;font-size:11px;color:#64748b;cursor:pointer}.bottom div.active{color:#fde68a}.bottom div span{font-size:22px;display:block}
+.admin-bar{position:fixed;bottom:78px;right:10px;background:#1e293b;padding:6px 12px;border-radius:20px;border:1px solid #c9a227;z-index:20;display:flex;gap:8px}
+#adminPage{display:none;position:fixed;inset:0;background:#0f172a;z-index:999;padding:16px;overflow:auto}
+</style>
+</head>
+<body>
+<div class="header"><div class="halo"></div><h1>HEAVENLY<span>MARCHING</span></h1></div>
+<div class="box">
+<h3 style="border-bottom:3px solid #fde68a;display:inline-block">Tafuta Mpenzi</h3>
+<div style="display:flex;gap:8px;margin-top:12px"><div style="width:80px"><b>Jinsia</b></div><select id="fJinsia"><option>Mwanamke • 21-30</option><option>Mwanaume</option><option>Mwanamke</option></select></div>
+<div style="display:flex;gap:8px;margin-top:6px"><div style="width:80px"><b>Mahali</b></div><select id="fMkoa"><option value="">Tanzania</option><option>Dar es Salaam</option><option>Arusha</option><option>Mwanza</option><option>Dodoma</option></select></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px"><button class="btn btn-gold" onclick="tafuta()">TAFUTA</button><button class="btn btn-outline" onclick="wekaUpya()">WEKA UPYA</button></div>
+<div style="margin-top:18px">
+<input type="file" id="picha" accept="image/*">
+<input id="jina" placeholder="Jina lako">
+<input id="umri" type="number" placeholder="Umri">
+<select id="mkoa"><option value="">Chagua Mkoa</option><option>Dar es Salaam</option><option>Arusha</option><option>Mwanza</option><option>Dodoma</option><option>Mbeya</option><option>Tanga</option><option>Zanzibar</option></select>
+<input id="namba" placeholder="Namba yako 07...">
+<textarea id="maelezo" placeholder="Maelezo..."></textarea>
+<button class="btn btn-gold" style="margin-top:8px" onclick="tangaza()">TANGAZA SASA</button>
+</div>
+<div class="rules">📜 Sheria: 1.Heshimu watu 2.Usitume utupu 3.Taarifa za kweli 4.Malipo 0674429728</div>
+</div>
+<div class="disc">⚠️ Mmiliki wa website hausiki na wizi au jambo lolote baya watakapokutana. Onana sehemu za wazi.</div>
+<div style="text-align:center;color:#475569;font-size:13px">✦ Matokeo <span id="count">0</span>+ • Watu Wapya Leo ✦</div>
+<div id="list"></div>
+<div class="admin-bar"><span id="count2" style="color:#c9a227;font-weight:bold">0</span><button style="background:#fde68a;border:none;padding:6px 10px;border-radius:10px;font-weight:bold" onclick="clickGear()">⚙️ ADMIN</button></div>
+<div class="bottom">
+<div class="active" onclick="location.reload()"><span>⭐</span>Nyumbani</div>
+<div onclick="alert('Lipa 0674429728')"><span>💬</span>Ujumbe</div>
+<div onclick="alert('Lipa 0674429728')"><span>❤️</span>Mechi</div>
+<div onclick="clickGear()"><span>⚙️</span>Mipangilio</div>
+<div onclick="alert('Profaili')"><span>👤</span>Profili</div>
+</div>
+<div id="adminPage"><h2>Admin</h2><p id="adminInfo"></p><button class="btn btn-outline" style="margin:10px 0" onclick="closeAdmin()">Funga</button><div id="adminList"></div></div>
+<script>
+const ADMIN_PASSWORD="Heavenly0674!";let watu=JSON.parse(localStorage.getItem('watu_v3')||'[]');let clicks=0;let picBase64="";
+document.getElementById('picha').addEventListener('change',e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>picBase64=r.result;r.readAsDataURL(f);});
+function clickGear(){clicks++;setTimeout(()=>clicks=0,2000);if(clicks>=3){clicks=0;let p=prompt('Password:');if(p===ADMIN_PASSWORD){document.getElementById('adminPage').style.display='block';let h='';watu.forEach((w,i)=>{h+=`<div class="card"><div class="card-top"><img src="${w.pic||'https://ui-avatars.com/api/?name='+w.jina}" class="avatar"><div><b>${w.jina}</b> ${w.namba}<br><small>${w.mkoa}</small></div></div><button class="btn btn-gold" style="background:#ef4444;color:#fff;margin-top:8px" onclick="futa(${i})">Futa</button></div>`});document.getElementById('adminList').innerHTML=h||'Hakuna';document.getElementById('adminInfo').innerText='Watu: '+watu.length;}else if(p)alert('Password sio sahihi');}}
+function closeAdmin(){document.getElementById('adminPage').style.display='none'}
+function futa(i){if(confirm('Futa?')){watu.splice(i,1);localStorage.setItem('watu_v3',JSON.stringify(watu));render();closeAdmin();}}
+function render(fM=''){count.innerText=watu.length;count2.innerText=watu.length;let d=fM?watu.filter(w=>w.mkoa===fM):watu;let html='';d.slice().reverse().forEach(w=>{let img=w.pic||`https://ui-avatars.com/api/?name=${encodeURIComponent(w.jina)}&background=0f172a&color=fde68a`;html+=`<div class="card"><div class="card-top"><img src="${img}" class="avatar"><div><b style="font-size:17px">${w.jina}, ${w.umri} • ${w.mkoa}</b><div style="font-size:13px;color:#cbd5e1;margin-top:2px">${w.maelezo||'Natafuta mwenza...'}</div><div style="margin-top:5px"><span class="blur">Simu: ${w.namba}</span></div></div></div><button class="btn btn-gold" style="margin-top:10px" onclick="alert('Lipa 0674429728')">ONA NAMBA - LIPA 0674429728</button></div>`});list.innerHTML=html||'<p style="text-align:center;color:#475569;margin:20px">Hakuna matangazo bado</p>';}
+function tangaza(){let j=jina.value.trim(),u=umri.value.trim(),mk=mkoa.value,n=namba.value.trim(),e=maelezo.value.trim();if(!j||!u||!n)return alert('Jaza Jina, Umri, Namba');watu.push({jina:j,umri:u,mkoa:mk||'Tanzania',namba:n,maelezo:e,pic:picBase64});localStorage.setItem('watu_v3',JSON.stringify(watu));jina.value='';umri.value='';namba.value='';maelezo.value='';picha.value='';picBase64='';render();alert('Umetangazwa!');}
+function tafuta(){render(fMkoa.value)}function wekaUpya(){fMkoa.value='';render()}render();
+</script>
+</body>
+</html>
